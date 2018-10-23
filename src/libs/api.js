@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import axios from 'axios';
 
+// {
+//     AppKey: '1170181022253438#tr-police110',
+//     ClientID: 'YXA65AoFkNYGEeic_G-0g7YwQA',
+//     ClientSecret : 'YXA6yweDOXDwvE2lo48UhMVVe8f5c30'
+// }
+
 let API = {};
 API.ajax = function (options) {
     let promise = new Promise((resolve, reject) => {
