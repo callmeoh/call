@@ -21,11 +21,7 @@ API.ajax = function (options) {
         
         axios(options).then(function (response) {
             let data = response.data;
-            
-            let success = data.success;
-            let errors = data.errors;
-            let result = data.result;
-            if (success) {
+            if (data) {
                 resolve(data);
                 return;
             }
