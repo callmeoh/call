@@ -334,6 +334,13 @@ WebIM.conn.listen({
             break
         }
     },
+    onLocationMessage: msg => {
+        console.log("onInviteMessage", msg)
+        store.dispatch(MessageActions.updateLocation(msg))
+        // store.dispatch(GroupActions.getGroups())
+        // message.success(`${msg.from}${I18n.t("invite")}${I18n.t("you")}${I18n.t("join")}${msg.roomid}`)
+    
+    },//收到位置消息
     onInviteMessage: msg => {
         console.log("onInviteMessage", msg)
         store.dispatch(GroupRequestActions.addGroupRequest(msg))

@@ -85,6 +85,11 @@ const msgTpl = {
         url: "",
         thumb: "",
         thumb_secret: ""
+    },
+    loc: {
+        type: "shareLocation",
+        latitude:  0,
+        longitude: 0
     }
 }
 
@@ -191,6 +196,39 @@ function copy(message, tpl) {
     return obj
 }
 
+function senpos(chatType, chatId,message= {}){
+    // (dispatch, getState) => {
+   
+        const id = WebIM.conn.getUniqueId();
+        const to = chatId;
+        const msgObj = new WebIM.message('location', id);
+        const roomType = chatType === "chatroom";
+        const lat ='1';
+        const addr ='222';
+        const lng ='3123';
+        debugger
+        // console.log(pMessage)
+        msgObj.set({
+            //TODO: cate type == 'chatrooms'
+            roomType,
+            to,
+            addr,
+            lat,
+            lng,
+            success: function () {
+                debugger
+                //dispatch(Creators.updateMessageStatus(pMessage, "sent"))
+            },
+            fail: function () {
+                //dispatch(Creators.updateMessageStatus(pMessage, "fail"))
+            }
+        })
+
+        
+
+        WebIM.conn.send(msgObj.body)
+        // dispatch(Creators.addMessage(pMessage, type))
+    }
 const { Types, Creators } = createActions({
     addMessage: [ "message", "bodyType" ],
     updateMessageStatus: [ "message", "status" ],
@@ -201,6 +239,8 @@ const { Types, Creators } = createActions({
     // clearUnread: [ "chatType", "id" ],
     // ---------------async------------------
     sendTxtMessage: (chatType, chatId, message = {}) => {
+        senpos(chatType, chatId)
+        return
         // console.log('sendTxtMessage', chatType, chatId, message)
         return (dispatch, getState) => {
             const pMessage = parseFromLocal(chatType, chatId, message, "txt")
@@ -447,6 +487,14 @@ const { Types, Creators } = createActions({
             msgObj.set({ id: msg.id, to: msg.from, ext: { logo: "easemob" } })
             WebIM.conn.send(msgObj.body)            
         }
+    },
+    updateLocation: msg => {
+        return (dispatch) => {
+            dispatch({ "type": "UPDATA_LOCATION", "chatType": chatType, "id": id })
+            // const msgObj = new WebIM.message("read", WebIM.conn.getUniqueId())
+            // msgObj.set({ id: msg.id, to: msg.from, ext: { logo: "easemob" } })
+            // WebIM.conn.send(msgObj.body)            
+        }
     }
 })
 
@@ -462,6 +510,7 @@ export const INITIAL_STATE = Immutable({
     chatroom: {},
     stranger: {},
     extra: {},
+    location: {},
     unread: {
         chat: {},
         groupchat: {},
@@ -611,7 +660,10 @@ export const fetchMessage = (state, { id, chatType, messages, offset }) => {
     //-----------------------
     return state.setIn([ chatType, id ], data)
 }
-
+export const updateLocation = (state, { message, status = "" }) => {
+    debugger
+    return state = state.setIn('location', message)
+}
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -622,7 +674,8 @@ export const reducer = createReducer(INITIAL_STATE, {
     [Types.CLEAR_MESSAGE]: clearMessage,
     [Types.CLEAR_UNREAD]: clearUnread,
     [Types.INIT_UNREAD]: initUnread,
-    [Types.FETCH_MESSAGE]: fetchMessage
+    [Types.FETCH_MESSAGE]: fetchMessage,
+    [Types.FETCH_MESSAGE]: updateLocation
 })
 
 /* ------------- Selectors ------------- */
