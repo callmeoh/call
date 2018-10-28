@@ -422,7 +422,7 @@ class Chat extends React.Component {
           height: -10
         };
         const markerPoint = {
-          lng: 116.404,
+          lng: 120.404,
           lat: 39.915
         };
         return (
@@ -538,7 +538,7 @@ class Chat extends React.Component {
                <div className="x-chat-right-content" style={{display: xisMap,
                 position: 'absolute',
                 right: '0',
-                top: '50px',
+                top: '53px',
                 width: ismap,
                 height: '100%',
                 overflow: 'hidden',

@@ -10,8 +10,8 @@ var Channel = React.createClass({
         return {
             collapsed: this.props.collapsed,
             localFullRemoteCorner: this.props.localFullRemoteCorner,
-            full_width: 360,
-            full_height: 360,
+            full_width: 300,
+            full_height: 500,
             toggle_right: 0,
             toggle_top: 0,
             toggle_display: "none",
@@ -245,19 +245,27 @@ var Channel = React.createClass({
                 <video ref='localVideo' className={localClassName} muted autoPlay/>
                 <video ref='remoteVideo' className={remoteClassName} autoPlay/>
                 <span>{this.props.title}</span>
-                <i ref='close' id='webrtc_close' className='font small close' style={{
+                <i ref='close' id='webrtc_close' className='close' style={{
                     left: "auto",
-                    right: this.state.close_right + "px",
+                    right: 40 + "px",
                     top: "auto",
-                    bottom: this.state.close_bottom + "px"
-                }} onClick={this.close}>Q</i>
-                <i ref='accept' className='font small accept' style={{
+                    bottom: 38 + "px",
+                    width:'50px',
+                    height:'50px',
+                    lineHeight: '130px',
+                    color: '#fff'
+                }} onClick={this.close}>拒绝</i>
+                <i ref='accept' className='accept' style={{
                     display: this.state.accept_display,
-                    left: this.state.accept_left + "px",
+                    left: 40 + "px",
                     right: "auto",
                     top: "auto",
-                    bottom: this.state.accept_bottom + "px"
-                }} onClick={this.accept}>z</i>
+                    bottom: 38 + "px",
+                    width:'50px',
+                    height:'50px',
+                    lineHeight: '130px',
+                    color: '#fff'
+                }} onClick={this.accept}>接听</i>
                 <i ref='toggle' className='font small toggle'
                     style={{
                         display: this.state.toggle_display,

@@ -39,7 +39,7 @@
     position: fixed;
     margin: auto;
     right: 0;
-    left: 0;
+    left: -140px;
     top: 0;
     bottom: 0;
     overflow: hidden;
@@ -48,7 +48,7 @@
 
     video {
         position: absolute;
-
+        background: rgba(0, 0, 0, 0.96);
         &.full {
             z-index: 1;
             width: 100%;
@@ -87,7 +87,7 @@
         font-style: normal;
         border-radius: 50%;
         text-align: center;
-        color: rgba(0, 0, 0, .2);
+        // color: rgba(0, 0, 0, .2);
         cursor: pointer;
         line-height: 1;
 
@@ -96,14 +96,17 @@
         //}
 
         &.close {
-            color: #e90101;
+            background: url('../img/noaccept.png')no-repeat;
+            background-size: contain;
+
         }
 
         &.toggle {
             color: #98e024;
         }
         &.accept {
-            color: #98e024;
+            background: url('../img/accept.png')no-repeat;
+            background-size: contain;
         }
         &.mute {
             color: #eeeeee;

@@ -135,7 +135,7 @@ class HeaderOps extends Component {
                         margin: "0 12px 0 0",
                         fontSize: 24,
                         lineHeight: "50px",
-                        color: "#fff",
+                        color: "#9a9494",
                         cursor: "pointer",
                         marginLeft: '10px'
                     }}
@@ -144,7 +144,7 @@ class HeaderOps extends Component {
                         <Icon type="setting" />
                     </Dropdown>
                 </div>
-                <div className="fr" style={{ lineHeight: "50px", color: "#fff" }}>
+                <div className="fr" style={{ lineHeight: "50px", color: "#333" }}>
                     {title}
                 </div>
                 <div
