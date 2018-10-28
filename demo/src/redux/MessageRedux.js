@@ -206,7 +206,6 @@ function senpos(chatType, chatId,message= {}){
         const lat ='1';
         const addr ='222';
         const lng ='3123';
-        debugger
         // console.log(pMessage)
         msgObj.set({
             //TODO: cate type == 'chatrooms'
@@ -216,7 +215,6 @@ function senpos(chatType, chatId,message= {}){
             lat,
             lng,
             success: function () {
-                debugger
                 //dispatch(Creators.updateMessageStatus(pMessage, "sent"))
             },
             fail: function () {
@@ -240,7 +238,6 @@ const { Types, Creators } = createActions({
     // ---------------async------------------
     sendTxtMessage: (chatType, chatId, message = {}) => {
         senpos(chatType, chatId)
-        return
         // console.log('sendTxtMessage', chatType, chatId, message)
         return (dispatch, getState) => {
             const pMessage = parseFromLocal(chatType, chatId, message, "txt")
@@ -490,6 +487,7 @@ const { Types, Creators } = createActions({
     },
     updateLocation: msg => {
         return (dispatch) => {
+            debugger
             dispatch({ "type": "UPDATA_LOCATION", "chatType": chatType, "id": id })
             // const msgObj = new WebIM.message("read", WebIM.conn.getUniqueId())
             // msgObj.set({ id: msg.id, to: msg.from, ext: { logo: "easemob" } })
@@ -675,7 +673,7 @@ export const reducer = createReducer(INITIAL_STATE, {
     [Types.CLEAR_UNREAD]: clearUnread,
     [Types.INIT_UNREAD]: initUnread,
     [Types.FETCH_MESSAGE]: fetchMessage,
-    [Types.FETCH_MESSAGE]: updateLocation
+    [Types.UPDATE_LOCATION]: updateLocation
 })
 
 /* ------------- Selectors ------------- */

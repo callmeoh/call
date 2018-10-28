@@ -174,7 +174,6 @@ class Chat extends React.Component {
         const { selectItem, selectTab } = match.params
         const { value } = this.state
         if (!value) return
-            debugger
         this.props.sendTxtMessage(chatType[selectTab], selectItem, {
             msg: value
         })
