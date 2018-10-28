@@ -336,9 +336,8 @@ class DefaultLayout extends Component {
     }
 
     render() {
-        const { collapsed, selectTab, selectItem, headerTabs, roomId } = this.state
+        const { collapsed, selectTab, selectItem, headerTabs, roomId, location } = this.state
         const { login, rightSiderOffset, multiAV,entities } = this.props
-
         let multiAVModal = multiAV.ifShowMultiAVModal ? <MultiAVModal /> : null
 
         if(this.props.multiAV.ifShowMultiAVModal && !this.multiAVSelectItem){
