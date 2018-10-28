@@ -25,6 +25,8 @@ import getTabMessages from "@/selectors/ChatSelector"
 import WebRTCModal from "@/components/webrtc/WebRTCModal"
 import AddAVMemberModal from "@/components/webrtc/AddAVMemberModal"
 import ModalComponent from "@/components/common/ModalComponent"
+import { Map, Navigation, Marker, Label } from "rc-bmap";
+
 
 const { TextArea } = Input
 const FormItem = Form.Item
@@ -50,7 +52,8 @@ class Chat extends React.Component {
             selectTab,
             selectItem,
             value: "",
-            isLoaded: false
+            isLoaded: false,
+            isMapVis: true
         }
         this.handleSend = this.handleSend.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -411,11 +414,20 @@ class Chat extends React.Component {
             </label>)
         }
 
-        const { showWebRTC } = this.state
-
+        const { showWebRTC,isMapVis } = this.state
+        let ismap = isMapVis ? '50%' : '0';
+        let xisMap = isMapVis ? "block" : "none";
+        const labelOffset = {
+          width: 0,
+          height: -10
+        };
+        const markerPoint = {
+          lng: 116.404,
+          lat: 39.915
+        };
         return (
             <div className="x-chat">
-                <div className="x-list-item x-chat-header">
+                {/*<div className="x-list-item x-chat-header">
                     <div className="fl">
                         {collapsed
                             ? <Icon
@@ -445,79 +457,99 @@ class Chat extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div className="x-chat-content" ref="x-chat-content" onScroll={this.handleScroll}>
-                    {/* fixed bug of messageList.map(...) */}
-                    {this.state.isLoaded && <div style={{ width: "150px", height: "30px", lineHeight: "30px", backgroundColor: "#888", color: "#fff", borderRadius: "15px", textAlign: "center", margin: "10px auto" }}>{I18n.t("noMoreMessage")}</div>}
-                    {_.map(messageList, message => <ChatMessage key={message.id} {...message} />)}
-                </div>
-                <div className="x-chat-footer">
-                    <div className="x-list-item x-chat-ops">
-                        {/* emoji */}
-                        <div className="x-chat-ops-icon ib">
-                            <ChatEmoji onClick={this.handleEmojiSelect} />
-                        </div>
-                        {/* image upload */}
-                        <label
-                            htmlFor="uploadImage"
-                            className="x-chat-ops-icon ib"
-                            onClick={() => this.image && this.image.focus() && this.image.click()}>
-                            <i className="iconfont icon-picture" />
-                            <input
-                                id="uploadImage"
-                                ref={node => (this.image = node)}
-                                onChange={this.pictureChange}
-                                type="file"
-                                className="hide"
-                            />
-                        </label>
-                        {/*  file upload*/}
-                        <label
-                            htmlFor="uploadFile"
-                            className="x-chat-ops-icon ib"
-                            onClick={() => this.file && this.file.focus() && this.file.click()}>
-                            <i className="icon iconfont icon-file-empty" />
-                            <input
-                                id="uploadFile"
-                                ref={node => (this.file = node)}
-                                onChange={this.fileChange}
-                                type="file"
-                                className="hide"
-                            />
-                        </label>
-                        {/* webrtc video && audio */}
-                        {webrtcButtons}
-                        {/* clear */}
-                        <label htmlFor="clearMessage" className="x-chat-ops-icon ib" onClick={this.onClearMessage}>
-                            <i className="icon iconfont icon-trash"></i>
-                        </label>
+            */}
+               <div className="x-chat-left-content">
+                    <div className="x-chat-content" style={{right: ismap}} ref="x-chat-content" onScroll={this.handleScroll}>
+                        {/* fixed bug of messageList.map(...) */}
+                        {this.state.isLoaded && <div style={{ width: "150px", height: "30px", lineHeight: "30px", backgroundColor: "#888", color: "#fff", borderRadius: "15px", textAlign: "center", margin: "10px auto" }}>{I18n.t("noMoreMessage")}</div>}
+                        {_.map(messageList, message => <ChatMessage key={message.id} {...message} />)}
                     </div>
-                    <div className="x-list-item x-chat-send">
-                        <Input
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            onPressEnter={this.handleSend}
-                            placeholder={I18n.t("message")}
-                            addonAfter={
-                                <i
-                                    className="fontello icon-paper-plane"
-                                    onClick={this.handleSend}
-                                    style={{ cursor: "pointer" }}
+                    <div className="x-chat-footer" style={{right: ismap}}>
+                        <div className="x-list-item x-chat-ops">
+                            {/* emoji */}
+                            <div className="x-chat-ops-icon ib">
+                                <ChatEmoji onClick={this.handleEmojiSelect} />
+                            </div>
+                            {/* image upload */}
+                            <label
+                                htmlFor="uploadImage"
+                                className="x-chat-ops-icon ib"
+                                onClick={() => this.image && this.image.focus() && this.image.click()}>
+                                <i className="iconfont icon-picture" />
+                                <input
+                                    id="uploadImage"
+                                    ref={node => (this.image = node)}
+                                    onChange={this.pictureChange}
+                                    type="file"
+                                    className="hide"
                                 />
-                            }
-                            ref={node => (this.input = node)}
-                        />
-                        {/*<TextArea rows={2} />*/}
+                            </label>
+                            {/*  file upload*/}
+                            <label
+                                htmlFor="uploadFile"
+                                className="x-chat-ops-icon ib"
+                                onClick={() => this.file && this.file.focus() && this.file.click()}>
+                                <i className="icon iconfont icon-file-empty" />
+                                <input
+                                    id="uploadFile"
+                                    ref={node => (this.file = node)}
+                                    onChange={this.fileChange}
+                                    type="file"
+                                    className="hide"
+                                />
+                            </label>
+                            {/* webrtc video && audio */}
+                            {webrtcButtons}
+                            {/* clear */}
+                            <label htmlFor="clearMessage" className="x-chat-ops-icon ib" onClick={this.onClearMessage}>
+                                <i className="icon iconfont icon-trash"></i>
+                            </label>
+                        </div>
+                        <div className="x-list-item x-chat-send">
+                            <Input
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                                onPressEnter={this.handleSend}
+                                placeholder={I18n.t("message")}
+                                addonAfter={
+                                    <i
+                                        className="fontello send-message"
+                                        onClick={this.handleSend}
+                                        style={{ cursor: "pointer" }}
+                                        >发送</i>
+                                }
+                                ref={node => (this.input = node)}
+                            />
+                            {/*<TextArea rows={2} />*/}
+                        </div>
                     </div>
+
+                    {/* <WebRTCModal collapsed={collapsed} visible={showWebRTC} /> */}
+                    <ModalComponent
+                        width={460}
+                        /* title={I18n.t("addAFriend")} */
+                        title={"选择成员"}
+                        visible={confrModal === true}
+                        component={AddAVMemberModal}
+                        onModalClose={this.handleModalClose}
+                    />
                 </div>
-                {/* <WebRTCModal collapsed={collapsed} visible={showWebRTC} /> */}
-                <ModalComponent
-                    width={460}
-                    /* title={I18n.t("addAFriend")} */
-                    title={"选择成员"}
-                    visible={confrModal === true}
-                    component={AddAVMemberModal}
-                    onModalClose={this.handleModalClose}
-                />
+
+               <div className="x-chat-right-content" style={{display: xisMap,
+                position: 'absolute',
+                right: '0',
+                top: '50px',
+                width: ismap,
+                height: '100%',
+                overflow: 'hidden',
+                paddingBottom: '50px'  
+               }}>
+                    <Map ak="s7c9CHqQmFvPcPu2ZUp4t4kVDvGM5zMX" scrollWheelZoom>
+                    <Marker
+                      point={markerPoint}
+                      />
+                   </Map>
+               </div>
             </div>
         )
     }

@@ -31,7 +31,7 @@ const ContactItem = ({ chatType, items, collapse, hasLogo, ...rest }) => {
                     {/* {chatType === "group" ? <Badge count={item.unread} style={{ marginLeft: 10 }} /> : ""} */}
                     <Badge count={item.unread} style={{ marginLeft: 10 }} />
                 </div>
-                <div className="nav-text-desc">
+                <div className="nav-text-desc" style={{display: "none"}}>
                     {item.latestMessage}
                 </div>
             </div>

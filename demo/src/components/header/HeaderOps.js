@@ -130,29 +130,31 @@ class HeaderOps extends Component {
         return (
             <div id="x-header-ops" className="x-list-item headerBg">
                 <div
-                    className="fl"
+                    className="fr"
                     style={{
                         margin: "0 12px 0 0",
                         fontSize: 24,
                         lineHeight: "50px",
                         color: "#fff",
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        marginLeft: '10px'
                     }}
                 >
                     <Dropdown overlay={menuSettings} trigger={[ "click" ]} style={{ position: "absolute" }}>
                         <Icon type="setting" />
                     </Dropdown>
                 </div>
-                <div className="fl" style={{ lineHeight: "50px", color: "#fff" }}>
+                <div className="fr" style={{ lineHeight: "50px", color: "#fff" }}>
                     {title}
                 </div>
                 <div
-                    className="fr"
+                    className="fl"
                     style={{
                         fontSize: 24,
                         lineHeight: "50px",
                         color: "#fff",
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        display:"none"
                     }}
                 >
                     <Dropdown overlay={menuRight} placement="bottomRight" trigger={[ "click" ]}>

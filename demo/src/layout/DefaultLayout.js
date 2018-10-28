@@ -45,22 +45,22 @@ class DefaultLayout extends Component {
                     key: "contact",
                     name: `${I18n.t("friends")}`,
                     icon: "fontello icon-comment"
-                },
-                {
-                    key: "group",
-                    name: `${I18n.t("groups")}`,
-                    icon: "fontello icon-chat"
-                },
-                {
-                    key: "chatroom",
-                    name: `${I18n.t("chatrooms")}`,
-                    icon: "fontello icon-users-1"
-                },
-                {
-                    key: "stranger",
-                    name: `${I18n.t("strangers")}`,
-                    icon: "fontello icon-address-book-1"
                 }
+                // {
+                //     key: "group",
+                //     name: `${I18n.t("groups")}`,
+                //     icon: "fontello icon-chat"
+                // },
+                // {
+                //     key: "chatroom",
+                //     name: `${I18n.t("chatrooms")}`,
+                //     icon: "fontello icon-users-1"
+                // },
+                // {
+                //     key: "stranger",
+                //     name: `${I18n.t("strangers")}`,
+                //     icon: "fontello icon-address-book-1"
+                // }
             ],
             rightSiderOffset: -1 * RIGHT_SIDER_WIDTH,
             roomId: NaN,
@@ -356,15 +356,7 @@ class DefaultLayout extends Component {
 
         return (
             <Layout>
-                <Header className="header">
-                    <HeaderOps title={login.username} />
-                    <HeaderTab
-                        collapsed={collapsed}
-                        items={headerTabs}
-                        selectedKeys={[ selectTab ]}
-                        onClick={this.changeTab}
-                    />
-                </Header>
+                
                 <Content className="x-layout-main">
                     <div
                         className="x-layout-sider"
@@ -372,11 +364,20 @@ class DefaultLayout extends Component {
                             // sider full display when breakpoint
                             width: collapsed ? "100%" : SIDER_WIDTH,
                             // sider display to left when breakpoint and has selectItem
-                            left: selectItem && collapsed ? "-100%" : 0
+                            left: selectItem && collapsed ? "-100%" : 0,
+                            backgroundImage: "-webkit-linear-gradient(top, #415077, #2E3A59)"
                         }}
                     >
+                    <h3 className="sider-logo">贵阳市网上报警系统</h3>
+                        <HeaderTab
+                                collapsed={collapsed}
+                                items={headerTabs}
+                                selectedKeys={[ selectTab ]}
+                                onClick={this.changeTab}
+                            />
                         <Contact collapsed={false} onClick={this.changeItem} selectedKeys={[ selectItem ]}
                         />
+
                     </div>
                     <div className="x-layout-video"
                         style={{
@@ -386,13 +387,20 @@ class DefaultLayout extends Component {
                     >
                         <WebRTCModal collapsed={false} visible={true} />
                     </div>
+
+               
+
                     <Content
                         className="x-layout-chat"
                         style={{
-                            overflow: "scroll",
+                            overflow: "hidden",
                             margin: collapsed ? "0" : `0 0 0 ${SIDER_WIDTH}px`
                         }}
                     >
+                         <Header className="header">
+                            <HeaderOps title={login.username} />
+                            
+                        </Header>
                         <Route
                             path="/:selectTab/:selectItem"
                             render={props => <Chat collapsed={collapsed} {...props} />}

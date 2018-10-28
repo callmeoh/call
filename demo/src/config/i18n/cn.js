@@ -20,7 +20,7 @@ export const cn = {
     groups: "群组",
     strangers: "陌生人",
     chatrooms: "聊天室",
-    friends: "好友",
+    friends: "报警人列表",
     block: "加入黑名单",
     blacklist: "黑名单",
     invite: "邀请",

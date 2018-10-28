@@ -15,7 +15,7 @@ export default {
     logo: "",
     SIDER_COL_BREAK: "sm", //md
     SIDER_COL_WIDTH: 80,
-    SIDER_WIDTH: 350,
+    SIDER_WIDTH: 240,
     RIGHT_SIDER_WIDTH: _WIDTH,
     imgType: {
         gif: 1,

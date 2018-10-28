@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Button, Row, Form, Input, Checkbox } from "antd"
+import { Button, Row, Form, Input, Checkbox,Icon } from "antd"
 import { config } from "@/config"
 import styles from "./index.less"
 import LoginActions from "@/redux/LoginRedux"
@@ -37,35 +37,31 @@ const Login = ({
     // const b = a.b.c
     // console.log(messageList, "---")
 
-    const logo = WebIM.config.i18n == "cn" ? <i className='font'>V</i> : <i className="iconfont icon-hyphenate"/>
     return (
-        <div className="form x-login">
-            <div className="logo">
-                {logo}
-                <span>{config.name}</span>
-            </div>
-            <form>
+        <div className=" center">
+            <h3>XX110网上报警平台</h3>
+            <form className="login-content">
                 <FormItem hasFeedback>
                     {getFieldDecorator("username", {
                         rules: [
                             {
-                                required: true
+                                required: false
                             }
                         ]
-                    })(<Input size="large" onPressEnter={handleOk} placeholder={I18N.username}/>)}
+                    })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" className="username" placeholder="在此输入您的用户名"/>)}
                 </FormItem>
                 <FormItem hasFeedback>
                     {getFieldDecorator("password", {
                         rules: [
                             {
-                                required: true
+                                required: false
                             }
                         ]
-                    })(<Input size="large" type="password" onPressEnter={handleOk} placeholder={I18N.password}/>)}
+                    })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" type="password" className="pwd" placeholder="在此输入您的密码"/>)}
                 </FormItem>
-                <FormItem hasFeedback>{getFieldDecorator("type")(<Checkbox>{I18N.tokenSignin}</Checkbox>)}</FormItem>
+                {/*<FormItem hasFeedback>{getFieldDecorator("type")(<Checkbox>{I18N.tokenSignin}</Checkbox>)}</FormItem>*/}
                 <Row>
-                    <Button type="primary" size="large" onClick={handleOk} loading={loginLoading}>
+                    <Button type="primary" size="large" onClick={handleOk} className="btn-login" loading={loginLoading}>
                         {I18N.signIn}
                     </Button>
                 </Row>
