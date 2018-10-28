@@ -203,7 +203,7 @@ function senpos(chatType, chatId,message= {}){
         const to = chatId;
         const msgObj = new WebIM.message('location', id);
         const roomType = chatType === "chatroom";
-        const lng ='109.21';
+        const lng ='101.21';
         const addr ='222';
         const lat ='27.82';
 
@@ -664,6 +664,10 @@ export const fetchMessage = (state, { id, chatType, messages, offset }) => {
     return state.setIn([ chatType, id ], data)
 }
 export const updateLocation = (state, msg) => {
+    var s= JSON.parse(msg.location.ext.coordinate)
+    msg.location.lat = s.lat;
+    msg.location.attr = s.attr
+    msg.location.lng = s.lng
     state = state.setIn(['location'], msg.location);
     return state
 }
