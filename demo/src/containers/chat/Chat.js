@@ -22,6 +22,7 @@ import MultiAVActions from "@/redux/MultiAVRedux"
 import WebIM from "@/config/WebIM"
 import { history } from "@/utils"
 import getTabMessages from "@/selectors/ChatSelector"
+import getLoction from "@/selectors/locSelector"
 import WebRTCModal from "@/components/webrtc/WebRTCModal"
 import AddAVMemberModal from "@/components/webrtc/AddAVMemberModal"
 import ModalComponent from "@/components/common/ModalComponent"
@@ -383,7 +384,8 @@ class Chat extends React.Component {
             history,
             location,
             messageList,
-            confrModal
+            confrModal,
+            maps
         } = this.props
 
         const { selectItem, selectTab } = match.params
@@ -421,9 +423,9 @@ class Chat extends React.Component {
           width: 0,
           height: -10
         };
-        const markerPoint = {
-          lng: 120.404,
-          lat: 39.915
+        let markerPoint = {
+            lng: +maps.lng,
+            lat: +maps.lat
         };
         return (
             <div className="x-chat">
@@ -464,6 +466,7 @@ class Chat extends React.Component {
                         {this.state.isLoaded && <div style={{ width: "150px", height: "30px", lineHeight: "30px", backgroundColor: "#888", color: "#fff", borderRadius: "15px", textAlign: "center", margin: "10px auto" }}>{I18n.t("noMoreMessage")}</div>}
                         {_.map(messageList, message => <ChatMessage key={message.id} {...message} />)}
                     </div>
+
                     <div className="x-chat-footer" style={{right: ismap}}>
                         <div className="x-list-item x-chat-ops">
                             {/* emoji */}
@@ -544,9 +547,10 @@ class Chat extends React.Component {
                 overflow: 'hidden',
                 paddingBottom: '50px'  
                }}>
-                    <Map ak="s7c9CHqQmFvPcPu2ZUp4t4kVDvGM5zMX" scrollWheelZoom>
+                    <Map ak="s7c9CHqQmFvPcPu2ZUp4t4kVDvGM5zMX" center={markerPoint} scrollWheelZoom>
                     <Marker
                       point={markerPoint}
+
                       />
                    </Map>
                </div>
@@ -558,6 +562,7 @@ class Chat extends React.Component {
 export default connect(
     (state, props) => ({
         messageList: getTabMessages(state, props),
+        maps: state.entities.message.location,
         confrModal: state.multiAV.confrModal,
         avModal: state.multiAV.ifShowMultiAVModal
     }),

@@ -334,8 +334,18 @@ WebIM.conn.listen({
             break
         }
     },
+    onCmdMessage: msg => {
+        if (msg.action==='location'){
+            store.dispatch(MessageActions.updateLocation(msg))
+
+        }
+        console.log("onLocationMessage", msg)
+        // store.dispatch(GroupActions.getGroups())
+        // message.success(`${msg.from}${I18n.t("invite")}${I18n.t("you")}${I18n.t("join")}${msg.roomid}`)
+    
+    },
     onLocationMessage: msg => {
-        console.log("onInviteMessage", msg)
+        console.log("onLocationMessage", msg)
         store.dispatch(MessageActions.updateLocation(msg))
         // store.dispatch(GroupActions.getGroups())
         // message.success(`${msg.from}${I18n.t("invite")}${I18n.t("you")}${I18n.t("join")}${msg.roomid}`)

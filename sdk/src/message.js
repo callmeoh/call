@@ -107,7 +107,6 @@ var CryptoJS = require('crypto-js');
         this.body = {};
     };
     Message.location.prototype.set = function (opt) {
-        debugger
         this.body = {
             to: opt.to
             , type: this.type
