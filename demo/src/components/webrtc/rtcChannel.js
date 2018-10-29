@@ -169,8 +169,8 @@ var Channel = React.createClass({
         }
         if (hasAudio && !hasVideo) { //voice only
             this.setState({
-                full_width: 360,
-                full_height: 90,
+                full_width: 300,
+                full_height: 140,
             })
             this.setState({
                 toggle_display: "none",
@@ -210,8 +210,8 @@ var Channel = React.createClass({
             }
             if (hasAudio && !hasVideo) { //voice only
                 this.setState({
-                    full_width: 330,
-                    full_height: 90,
+                    full_width: 300,
+                    full_height: 140,
                 })
                 this.setState({
                     toggle_display: "none",
@@ -247,14 +247,14 @@ var Channel = React.createClass({
                 <span>{this.props.title}</span>
                 <i ref='close' id='webrtc_close' className='close' style={{
                     left: "auto",
-                    right: 40 + "px",
+                    right: (this.state.accept_display == 'none' ? '42%' : '40px'),
                     top: "auto",
                     bottom: 38 + "px",
                     width:'50px',
                     height:'50px',
                     lineHeight: '130px',
                     color: '#fff'
-                }} onClick={this.close}>拒绝</i>
+                }} onClick={this.close}>挂断</i>
                 <i ref='accept' className='accept' style={{
                     display: this.state.accept_display,
                     left: 40 + "px",
