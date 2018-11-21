@@ -504,9 +504,9 @@ class Chat extends React.Component {
                             {/* webrtc video && audio */}
                             {webrtcButtons}
                             {/* clear */}
-                            <label htmlFor="clearMessage" className="x-chat-ops-icon ib" onClick={this.onClearMessage}>
+                            {/*<label htmlFor="clearMessage" className="x-chat-ops-icon ib" onClick={this.onClearMessage}>
                                 <i className="icon iconfont icon-trash"></i>
-                            </label>
+                            </label>*/}
                         </div>
                         <div className="x-list-item x-chat-send">
                             <Input

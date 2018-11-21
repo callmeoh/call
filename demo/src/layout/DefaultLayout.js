@@ -367,7 +367,7 @@ class DefaultLayout extends Component {
                             backgroundImage: "-webkit-linear-gradient(top, #415077, #2E3A59)"
                         }}
                     >
-                    <h3 className="sider-logo">铜仁市网上报警系统</h3>
+                    <h3 className="sider-logo">公安网上报警系统</h3>
                         <HeaderTab
                                 collapsed={collapsed}
                                 items={headerTabs}

@@ -11,12 +11,12 @@ const ContactItem = ({ chatType, items, collapse, hasLogo, ...rest }) => {
     const tabsLen = tabs.length
     const tabCls = collapse ? "" : ""
 
-    const tabsItem = tabs.map(item =>
+    const tabsItem = tabs.map((item, index) =>
         <Menu.Item key={chatType == "chatroom" || chatType == "group" ? item.id : item.name} className={tabCls}>
             {hasLogo ? <ContactHead className="fl nav-img" name="test" width={50} /> : ""}
             <div className="nav-text">
                 <div>
-                    {item.name}
+                    报警人{index+ 1}
 
                     {/*
                         <Badge

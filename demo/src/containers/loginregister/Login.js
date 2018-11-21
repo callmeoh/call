@@ -39,7 +39,7 @@ const Login = ({
 
     return (
         <div className=" center">
-            <h3>铜仁市110网上报警平台</h3>
+            <h3>公安网上报警平台</h3>
             <form className="login-content">
                 <FormItem hasFeedback>
                     {getFieldDecorator("username", {
@@ -67,7 +67,7 @@ const Login = ({
                 </Row>
             </form>
             <div className="extra">
-                <p>
+                <p style={{display:'none'}}>
                     {I18N.noaccount}
                     <span onClick={jumpRegister}>{I18N.signUp}</span>
                 </p>
